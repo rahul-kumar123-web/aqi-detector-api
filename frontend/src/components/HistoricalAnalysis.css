@@ -1,0 +1,629 @@
+
+/* =====================================================
+   HISTORICAL AIR QUALITY ANALYSIS
+===================================================== */
+
+.historical-section {
+  width: 100%;
+  margin-top: 30px;
+  padding: 0;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 35px rgba(15, 23, 42, 0.08);
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.historical-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  padding: 28px 30px;
+
+  background: linear-gradient(
+    135deg,
+    #eff6ff 0%,
+    #ffffff 55%,
+    #f0fdf4 100%
+  );
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.historical-header::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  right: 100px;
+  top: -100px;
+  background: rgba(37, 99, 235, 0.08);
+  border-radius: 50%;
+}
+
+.historical-header h2 {
+  position: relative;
+  margin: 0 0 7px;
+
+  font-size: 25px;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+
+  color: #111827;
+}
+
+.historical-header p {
+  position: relative;
+  margin: 0;
+
+  color: #64748b;
+  font-size: 14px;
+}
+
+.historical-header strong {
+  color: #2563eb;
+}
+
+/* =====================================================
+   REFRESH BUTTON
+===================================================== */
+
+.historical-refresh-btn {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  min-width: 105px;
+  padding: 11px 17px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #2563eb;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.22);
+
+  transition: all 0.2s ease;
+}
+
+.historical-refresh-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.28);
+}
+
+.historical-refresh-btn:active {
+  transform: translateY(0);
+}
+
+.historical-refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =====================================================
+   CONTROLS
+===================================================== */
+
+.historical-controls {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+
+  padding: 24px 30px 0;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  min-width: 220px;
+}
+
+.control-group label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* =====================================================
+   CITY SELECT
+===================================================== */
+
+.city-display,
+.control-group select,
+.city-select {
+  height: 44px;
+
+  padding: 0 14px;
+
+  border: 1px solid #dbe2ea;
+  border-radius: 10px;
+
+  background: #f8fafc;
+  color: #111827;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  box-sizing: border-box;
+
+  transition: all 0.2s ease;
+}
+
+.control-group select,
+.city-select {
+  min-width: 220px;
+  outline: none;
+  cursor: pointer;
+
+  appearance: auto;
+}
+
+.city-select:hover,
+.control-group select:hover {
+  background: #ffffff;
+  border-color: #93c5fd;
+}
+
+.city-select:focus,
+.control-group select:focus {
+  background: #ffffff;
+  border-color: #2563eb;
+
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* =====================================================
+   METRIC TABS
+===================================================== */
+
+.metric-tabs {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+
+  padding: 24px 30px 0;
+}
+
+.metric-tab {
+  padding: 9px 16px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+
+  background: #f8fafc;
+  color: #475569;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.metric-tab:hover {
+  background: #eff6ff;
+  border-color: #93c5fd;
+  color: #2563eb;
+}
+
+.metric-tab.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+
+  box-shadow: 0 5px 14px rgba(37, 99, 235, 0.2);
+}
+
+/* =====================================================
+   CHART CARD
+===================================================== */
+
+.historical-chart-card {
+  margin: 24px 30px 30px;
+
+  padding: 22px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
+}
+
+/* =====================================================
+   CHART HEADING
+===================================================== */
+
+.chart-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+}
+
+.chart-heading h3 {
+  margin: 0 0 5px;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  color: #111827;
+}
+
+.chart-heading p {
+  margin: 0;
+
+  font-size: 13px;
+  color: #64748b;
+}
+
+.chart-value {
+  min-width: 90px;
+
+  padding: 10px 14px;
+
+  text-align: right;
+
+  border-radius: 10px;
+  background: #eff6ff;
+}
+
+.chart-value strong {
+  display: block;
+
+  font-size: 23px;
+  line-height: 1;
+
+  color: #2563eb;
+}
+
+.chart-value span {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* =====================================================
+   CHART
+===================================================== */
+
+.chart-container {
+  width: 100%;
+  height: 380px;
+
+  padding-top: 5px;
+}
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+.historical-statistics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 14px;
+
+  margin-top: 18px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 17px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  background: #f8fafc;
+
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  background: #ffffff;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.stat-icon {
+  flex-shrink: 0;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 12px;
+
+  background: #eff6ff;
+
+  font-size: 20px;
+}
+
+.stat-card p {
+  margin: 0 0 5px;
+
+  color: #64748b;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.stat-card h3 {
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.historical-loading {
+  min-height: 280px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  color: #64748b;
+}
+
+.loading-spinner {
+  width: 38px;
+  height: 38px;
+
+  margin-bottom: 14px;
+
+  border: 4px solid #e5e7eb;
+  border-top-color: #2563eb;
+
+  border-radius: 50%;
+
+  animation: historicalSpin 0.8s linear infinite;
+}
+
+@keyframes historicalSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.historical-error {
+  margin: 25px 30px;
+
+  padding: 24px;
+
+  border: 1px solid #fecaca;
+  border-radius: 14px;
+
+  background: #fff7f7;
+
+  text-align: center;
+
+  color: #991b1b;
+}
+
+.historical-error span {
+  font-size: 30px;
+}
+
+.historical-error p {
+  margin: 9px 0 15px;
+}
+
+.historical-error button {
+  padding: 9px 16px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #dc2626;
+  color: #ffffff;
+
+  cursor: pointer;
+}
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.historical-empty {
+  padding: 60px 20px;
+
+  text-align: center;
+
+  color: #64748b;
+}
+
+.historical-empty div {
+  margin-bottom: 10px;
+
+  font-size: 45px;
+}
+
+.historical-empty h3 {
+  margin: 0 0 8px;
+
+  color: #374151;
+}
+
+.historical-empty p {
+  margin: 0;
+
+  font-size: 14px;
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .historical-section {
+    margin-top: 20px;
+    border-radius: 16px;
+  }
+
+  .historical-header {
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 22px;
+  }
+
+  .historical-header h2 {
+    font-size: 21px;
+  }
+
+  .historical-refresh-btn {
+    width: 100%;
+  }
+
+  .historical-controls {
+    flex-direction: column;
+
+    padding: 20px 22px 0;
+  }
+
+  .control-group {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .city-display,
+  .control-group select,
+  .city-select {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .metric-tabs {
+    padding: 20px 22px 0;
+  }
+
+  .historical-chart-card {
+    margin: 20px 22px 22px;
+    padding: 16px;
+  }
+
+  .historical-statistics {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chart-value {
+    width: 100%;
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+  .chart-container {
+    height: 300px;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+  .historical-header {
+    padding: 18px;
+  }
+
+  .historical-header h2 {
+    font-size: 19px;
+  }
+
+  .historical-controls {
+    padding: 18px 18px 0;
+  }
+
+  .metric-tabs {
+    gap: 7px;
+    padding: 18px 18px 0;
+  }
+
+  .metric-tab {
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+
+  .historical-chart-card {
+    margin: 18px;
+    padding: 12px;
+  }
+
+  .chart-container {
+    height: 260px;
+  }
+
+  .chart-heading h3 {
+    font-size: 16px;
+  }
+
+  .chart-value strong {
+    font-size: 21px;
+  }
+
+  .stat-card {
+    padding: 14px;
+  }
+}
+
